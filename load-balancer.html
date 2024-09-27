@@ -1,0 +1,43 @@
+<p>1 create 3 ec2 amazon Linux t2.micro  (LOAD BAlancer)
+2 #!/bin/bash (while create paste this script user data)
+yum update -y
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+usermod -a -G apache ec2-user
+chmod 777 /var/www/html
+cd /var/www/html
+echo "<h1>hello from $(hostname -f) webserver</h1>">/var/www/html/index.html
+
+3 create application load balancer LB  
+4 target group -> path /index.html   
+5 check load balancer DNS link traffic is routing to different ip
+  (port 80 add inbound rules)
+
+Auto Scaling group
+
+1 Create ASG ->template name-> template version-> OS image amazon linux2023
+2 add script in user data
+  #!/bin/bash
+yum update -y
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+usermod -a -G apache ec2-user
+chmod 777 /var/www/html
+cd /var/www/html
+echo "<h1>hello from $(hostname -f) webserver</h1>">/var/www/html/index.html
+3 then template is created ,select the template then create the auto 
+4 check the load balance DNS link
+
+private LB
+
+1create an instance ->t2 medium_->
+2 rdp 3 vm   -> server manager-> add role& feature nxt-nxt-> IIS install
+3 c:drive inetpub / wwwroot index.html <h1>this is webserver1/2/3</h1>
+4 create a internal-lb(private LB) & create a Target group ->include instances
+  &attach target roup with LB
+
+5 server manager  -local server-IE enhance security configuration is (ON) then off others
+6 then copy the DNS link of internal LB paste  it in RDP server browser there work
+  it will not work on your physical machine browser</p>
