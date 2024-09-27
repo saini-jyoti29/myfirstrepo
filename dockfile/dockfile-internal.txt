@@ -1,0 +1,30 @@
+1 create folder make dockerfile with no extension
+2 FROM nginx (dockerfile content)
+COPY docker_txt /usr/share/
+COPY index.html /usr/share/nginx/html
+3 open powershell run as administrator
+4 cd C:\Users\mayan\OneDrive\Desktop\docker( copy the path of folder where your docker file save)
+5 ls
+6 docker build -t sainijyoti29/my-nginx3 .  (. for current directry)build your image
+7 docker images
+8 sainijyoti29/my-nginx3:latest (your latest image build like this)
+9 docker ps (check for any container run so stop it ) or delete- docker container prune
+10 create a container with the above image
+11 docker run --name my-nginx -p 80:80 -d sainijyoti29/my-nginx3:latest (create container)
+12 docker ps (check container)
+13 docker exec -it af2219c8950ad28224dadd23e111b5cdd50635161cc55640ebc0a80009557837   /bin/bash   (go into a container with this cmd - docker exec -it containerID /bin/bash)
+
+14 root@af2219c8950a:/# cd /usr/share/(now you are inside a container like this)
+15 root@af2219c8950a:/usr/share# ls (then you see your files are here)
+16 root@af2219c8950a:/usr/share# cat abc.txt(then you check your file data )
+17 root@af2219c8950a:/usr/share# ls
+18 root@af2219c8950a:/usr/share# cd nginx/
+19root@af2219c8950a:/usr/share/nginx# ls
+html
+20 root@af2219c8950a:/usr/share/nginx# cd html/
+ 21 root@af2219c8950a:/usr/share/nginx/html# ls
+50x.html  index.html
+22 root@af2219c8950a:/usr/share/nginx/html# cat index.html
+welcome to My first sample project (go to web-brouse check localhost)
+23 exit (exit form root or your container  )
+24 docker push sainijyoti29/my-nginx3:latest (push that image to your docker hub repo)
